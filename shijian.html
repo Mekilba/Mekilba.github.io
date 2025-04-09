@@ -3,6 +3,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>动态数字时钟</title>
     <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -20,75 +21,75 @@
 
       /* 主容器区域样式 */
       section {
-        min-height: 100vh; /* 最小高度撑满整个视口 */
+        min-height: 100vh;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #F0F8FF; /* 浅蓝色背景 */
+        background: #F0F8FF;
         padding: 0 20px;
-        transition: background-color 0.4s ease; /* 背景色过渡动画 */
+        transition: background-color 0.4s ease;
       }
 
       /* 暗色模式下的主容器 */
       section.dark {
-        background: #24292D; /* 深灰色背景 */
+        background: #24292D;
       }
 
-      /* 时钟容器样式 */
+      /* 时钟容器样式 - 放大尺寸 */
       section .container {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 220px;
-        max-width: 560px;
+        height: 300px;  /* 增大高度 */
+        max-width: 90vw; /* 使用视口宽度单位 */
         width: 100%;
-        background: #fff; /* 白色背景 */
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
-        border-radius: 12px; /* 圆角边框 */
+        background: #fff;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
         position: relative;
-        transition: background-color 0.4s ease; /* 背景色过渡动画 */
+        transition: background-color 0.4s ease;
       }
 
       /* 暗色模式下的时钟容器 */
       section.dark .container {
-        background: #323840; /* 深蓝色背景 */
+        background: #323840;
       }
 
-      /* 主题切换图标样式 */
+      /* 主题切换图标样式 - 放大 */
       .container .icons i {
         position: absolute;
-        right: 17px;
-        top: 17px;
-        height: 30px;
-        width: 30px;
-        background: #24292D; /* 深灰色背景 */
-        color: #fff; /* 白色图标 */
+        right: 20px;
+        top: 20px;
+        height: 40px;  /* 增大尺寸 */
+        width: 40px;
+        background: #24292D;
+        color: #fff;
         text-align: center;
-        line-height: 30px;
-        border-radius: 50%; /* 圆形按钮 */
-        font-size: 14px;
+        line-height: 40px;
+        border-radius: 50%;
+        font-size: 18px;  /* 增大字体 */
         cursor: pointer;
-        transition: all 0.3s ease; /* 过渡动画 */
+        transition: all 0.3s ease;
       }
 
       /* 暗色模式下的图标样式 */
       section.dark .container .icons i {
-        background: #fff; /* 白色背景 */
-        color: #323840; /* 深蓝色图标 */
+        background: #fff;
+        color: #323840;
       }
 
       /* 太阳图标默认隐藏 */
       .container .icons i.fa-sun {
         opacity: 0;
-        pointer-events: none; /* 不响应点击事件 */
+        pointer-events: none;
       }
 
       /* 暗色模式下显示太阳图标 */
       section.dark .container .icons i.fa-sun {
         opacity: 1;
-        pointer-events: auto; /* 响应点击事件 */
-        font-size: 16px;
+        pointer-events: auto;
+        font-size: 20px;  /* 增大字体 */
       }
 
       /* 时间显示区域 */
@@ -104,72 +105,72 @@
         position: relative;
       }
 
-      /* AM/PM指示器样式 */
+      /* AM/PM指示器样式 - 放大 */
       .time-colon .am_pm {
         position: absolute;
         top: 0;
-        right: -50px;
-        font-size: 20px;
+        right: -60px;  /* 调整位置 */
+        font-size: 28px;  /* 增大字体 */
         font-weight: 700;
         letter-spacing: 1px;
-        transition: color 0.4s ease; /* 文字颜色过渡 */
+        transition: color 0.4s ease;
       }
 
       /* 暗色模式下的AM/PM文字 */
       section.dark .time-colon .am_pm {
-        color: #fff; /* 白色文字 */
+        color: #fff;
       }
 
-      /* 时间数字区块样式 */
+      /* 时间数字区块样式 - 放大 */
       .time-colon .time-text {
-        height: 100px;
-        width: 100px;
+        height: 140px;  /* 增大高度 */
+        width: 140px;   /* 增大宽度 */
         display: flex;
         align-items: center;
         flex-direction: column;
         justify-content: center;
-        background: #F0F8FF; /* 浅蓝色背景 */
+        background: #F0F8FF;
         border-radius: 6px;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        transition: background-color 0.4s ease; /* 背景色过渡 */
+        transition: background-color 0.4s ease;
       }
 
       /* 暗色模式下的时间数字区块 */
       section.dark .time-colon .time-text {
-        background: #24292D; /* 深灰色背景 */
+        background: #24292D;
       }
 
-      /* 时间数字和冒号共用样式 */
+      /* 时间数字和冒号共用样式 - 放大 */
       .time-colon .time-text,
       .time-colon .colon {
-        font-size: 35px;
+        font-size: 50px;  /* 增大字体 */
         font-weight: 600;
-        transition: color 0.4s ease; /* 文字颜色过渡 */
+        transition: color 0.4s ease;
       }
 
       /* 暗色模式下的数字和冒号 */
       section.dark .time-text .num,
       section.dark .time .colon {
-        color: #fff; /* 白色文字 */
+        color: #fff;
       }
 
-      /* 冒号样式 */
+      /* 冒号样式 - 放大 */
       .time-colon .colon {
-        font-size: 40px;
-        margin: 0 10px;
+        font-size: 60px;  /* 增大字体 */
+        margin: 0 15px;   /* 增大间距 */
       }
 
-      /* 时间单位文字样式 */
+      /* 时间单位文字样式 - 放大 */
       .time-colon .time-text .text {
-        font-size: 12px;
+        font-size: 18px;  /* 增大字体 */
         font-weight: 700;
         letter-spacing: 2px;
-        transition: color 0.4s ease; /* 文字颜色过渡 */
+        transition: color 0.4s ease;
       }
 
       /* 暗色模式下的时间单位文字 */
       section.dark .time-colon .text {
-        color: #fff; /* 白色文字 */
+        color: #fff;
       }
     </style>
   </head>
