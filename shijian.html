@@ -4,9 +4,174 @@
   <head>
     <meta charset="UTF-8">
     <title>动态数字时钟</title>
-    <link rel="stylesheet" href="shijan.css">
     <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      /* 导入Google Orbitron字体 */
+      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+
+      /* 全局基础样式 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Orbitron, sans-serif;
+      }
+
+      /* 主容器区域样式 */
+      section {
+        min-height: 100vh; /* 最小高度撑满整个视口 */
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #F0F8FF; /* 浅蓝色背景 */
+        padding: 0 20px;
+        transition: background-color 0.4s ease; /* 背景色过渡动画 */
+      }
+
+      /* 暗色模式下的主容器 */
+      section.dark {
+        background: #24292D; /* 深灰色背景 */
+      }
+
+      /* 时钟容器样式 */
+      section .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 220px;
+        max-width: 560px;
+        width: 100%;
+        background: #fff; /* 白色背景 */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+        border-radius: 12px; /* 圆角边框 */
+        position: relative;
+        transition: background-color 0.4s ease; /* 背景色过渡动画 */
+      }
+
+      /* 暗色模式下的时钟容器 */
+      section.dark .container {
+        background: #323840; /* 深蓝色背景 */
+      }
+
+      /* 主题切换图标样式 */
+      .container .icons i {
+        position: absolute;
+        right: 17px;
+        top: 17px;
+        height: 30px;
+        width: 30px;
+        background: #24292D; /* 深灰色背景 */
+        color: #fff; /* 白色图标 */
+        text-align: center;
+        line-height: 30px;
+        border-radius: 50%; /* 圆形按钮 */
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease; /* 过渡动画 */
+      }
+
+      /* 暗色模式下的图标样式 */
+      section.dark .container .icons i {
+        background: #fff; /* 白色背景 */
+        color: #323840; /* 深蓝色图标 */
+      }
+
+      /* 太阳图标默认隐藏 */
+      .container .icons i.fa-sun {
+        opacity: 0;
+        pointer-events: none; /* 不响应点击事件 */
+      }
+
+      /* 暗色模式下显示太阳图标 */
+      section.dark .container .icons i.fa-sun {
+        opacity: 1;
+        pointer-events: auto; /* 响应点击事件 */
+        font-size: 16px;
+      }
+
+      /* 时间显示区域 */
+      .container .time {
+        display: flex;
+        align-items: center;
+      }
+
+      /* 时间区块样式 */
+      .time .time-colon {
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+
+      /* AM/PM指示器样式 */
+      .time-colon .am_pm {
+        position: absolute;
+        top: 0;
+        right: -50px;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        transition: color 0.4s ease; /* 文字颜色过渡 */
+      }
+
+      /* 暗色模式下的AM/PM文字 */
+      section.dark .time-colon .am_pm {
+        color: #fff; /* 白色文字 */
+      }
+
+      /* 时间数字区块样式 */
+      .time-colon .time-text {
+        height: 100px;
+        width: 100px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        background: #F0F8FF; /* 浅蓝色背景 */
+        border-radius: 6px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.4s ease; /* 背景色过渡 */
+      }
+
+      /* 暗色模式下的时间数字区块 */
+      section.dark .time-colon .time-text {
+        background: #24292D; /* 深灰色背景 */
+      }
+
+      /* 时间数字和冒号共用样式 */
+      .time-colon .time-text,
+      .time-colon .colon {
+        font-size: 35px;
+        font-weight: 600;
+        transition: color 0.4s ease; /* 文字颜色过渡 */
+      }
+
+      /* 暗色模式下的数字和冒号 */
+      section.dark .time-text .num,
+      section.dark .time .colon {
+        color: #fff; /* 白色文字 */
+      }
+
+      /* 冒号样式 */
+      .time-colon .colon {
+        font-size: 40px;
+        margin: 0 10px;
+      }
+
+      /* 时间单位文字样式 */
+      .time-colon .time-text .text {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        transition: color 0.4s ease; /* 文字颜色过渡 */
+      }
+
+      /* 暗色模式下的时间单位文字 */
+      section.dark .time-colon .text {
+        color: #fff; /* 白色文字 */
+      }
+    </style>
   </head>
   <body>
     <section>
@@ -41,6 +206,45 @@
       </div>
     </section>
 
-    <script src="shijan.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const section = document.querySelector('section');
+        const icons = document.querySelector('.icons');
+        
+        // Toggle dark mode
+        icons.addEventListener('click', () => {
+          section.classList.toggle('dark');
+        });
+      
+        // Update clock every second
+        function updateClock() {
+          const date = new Date();
+          let hour = date.getHours();
+          let min = date.getMinutes();
+          let sec = date.getSeconds();
+          
+          // Determine AM/PM
+          const ampm = hour < 12 ? 'AM' : 'PM';
+          
+          // Convert to 12-hour format
+          hour = hour % 12 || 12;
+          
+          // Add leading zeros
+          hour = hour.toString().padStart(2, '0');
+          min = min.toString().padStart(2, '0');
+          sec = sec.toString().padStart(2, '0');
+          
+          // Update DOM
+          document.querySelector('.hour_num').textContent = hour;
+          document.querySelector('.min_num').textContent = min;
+          document.querySelector('.sec_num').textContent = sec;
+          document.querySelector('.am_pm').textContent = ampm;
+        }
+      
+        // Initial call and set interval
+        updateClock();
+        setInterval(updateClock, 1000);
+      });
+    </script>
   </body>
 </html>
