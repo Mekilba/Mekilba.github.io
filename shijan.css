@@ -1,6 +1,5 @@
 /* 导入Google Orbitron字体 */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
-
 /* 全局基础样式 */
 * {
   margin: 0;
@@ -8,7 +7,6 @@
   box-sizing: border-box;
   font-family: Orbitron, sans-serif;
 }
-
 /* 主容器区域样式 */
 section {
   min-height: 100vh; /* 最小高度撑满整个视口 */
@@ -20,12 +18,10 @@ section {
   padding: 0 20px;
   transition: background-color 0.4s ease; /* 背景色过渡动画 */
 }
-
 /* 暗色模式下的主容器 */
 section.dark {
   background: #24292D; /* 深灰色背景 */
 }
-
 /* 时钟容器样式 */
 section .container {
   display: flex;
@@ -40,7 +36,6 @@ section .container {
   position: relative;
   transition: background-color 0.4s ease; /* 背景色过渡动画 */
 }
-
 /* 暗色模式下的时钟容器 */
 section.dark .container {
   background: #323840; /* 深蓝色背景 */
