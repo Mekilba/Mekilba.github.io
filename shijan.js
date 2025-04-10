@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     icons.addEventListener('click', () => {
       section.classList.toggle('dark');
     });
-  
     // Update clock every second
     function updateClock() {
       const date = new Date();
